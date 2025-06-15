@@ -1,0 +1,91 @@
+.main-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+}
+
+h1 {
+    color: var(--main-color);
+    font-size: 32px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid var(--form-btn);
+    background-color: var(--form-color);
+    max-width: 50%;
+    width: 400px;
+    margin-bottom: 20px;
+
+    & button {
+        border-radius: 30px;
+        background-color: var(--form-btn);
+        height: 40px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        color: var(--main-color);
+    }
+
+    & button:hover {
+        opacity: 0.8;
+    }
+
+    & input {
+        border: 2px solid var(--border-color);
+        border-radius: 30px;
+        height: 40px;
+        background-color: var(--input-color);
+        color: var(--main-color);
+        font-size: 15px;
+        padding-left: 10px;
+        outline: none;
+    }
+
+    & input::placeholder {
+        color: var(--secondary-color);
+    }
+
+    & input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--form-color);
+    margin: 10px;
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+    border: 2px solid var(--form-btn);
+
+    & p {
+        color: var(--main-color);
+        font-weight: bold;
+
+        & span {
+            font-weight: normal;
+        }
+    }
+
+    & button {
+        color: var(--main-color);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding-right: 10px;
+        font-size: 16px;
+    }
+
+    & button:hover {
+        color: var(--form-btn);
+    }
+}
+
