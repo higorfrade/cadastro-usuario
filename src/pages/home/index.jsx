@@ -1,5 +1,5 @@
 import './styles.css'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import api from '../../services/api'
@@ -7,12 +7,32 @@ import api from '../../services/api'
 
 function Home() {
 
-  let users = [];
+  const [users, setUsers] = useState([]);
+
+  const inputName = useRef();
+  const inputAge = useRef();
+  const inputEmail = useRef();
 
   async function getUsers() {
     const usersFromApi = await api.get('/usuarios');
 
-    users = usersFromApi.data;
+    setUsers(usersFromApi.data);
+  }
+
+  async function addUsers() {
+    await api.post('/usuarios', {
+      name: inputName.current.value,
+      age: parseInt(inputAge.current.value, 10),
+      email: inputEmail.current.value
+    });
+
+    getUsers();
+  }
+
+  async function deleteUsers(id) {
+    await api.delete(`/usuarios/${id}`);
+
+    getUsers();
   }
 
   useEffect(() => {
@@ -23,10 +43,10 @@ function Home() {
     <div className='main-container'>
       <form>
         <h1>Cadastro de Usuários</h1>
-        <input name='name' type="text" placeholder='Nome' />
-        <input name='age' type="number" placeholder='Idade' />
-        <input name='email' type="email" placeholder='E-mail' />
-        <button type="button">Cadastrar</button>
+        <input name='name' type="text" placeholder='Nome' ref={inputName} />
+        <input name='age' type="number" placeholder='Idade' ref={inputAge} />
+        <input name='email' type="email" placeholder='E-mail' ref={inputEmail} />
+        <button type="button" onClick={addUsers}>Cadastrar</button>
       </form>
 
     {users.map(user => (
@@ -36,7 +56,7 @@ function Home() {
           <p>Idade: <span>{user.age}</span></p>
           <p>E-mail: <span>{user.email}</span></p>
         </div>
-        <button className='delete-btn'>
+        <button className='delete-btn' onClick={() => deleteUsers(user.id)}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>

@@ -7,7 +7,8 @@
 
 h1 {
     color: var(--main-color);
-    font-size: 32px;
+    font-size: 30px;
+    text-align: center;
 }
 
 form {
@@ -54,6 +55,11 @@ form {
     & input::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
+
+    & input:hover {
+        border: 2px solid var(--form-btn);
+    }
+
 }
 
 .card {
